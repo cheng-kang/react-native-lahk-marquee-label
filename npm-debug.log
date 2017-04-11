@@ -1,0 +1,111 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@4.1.2
+3 info using node@v4.0.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/ant/github/react-native-marquee-label',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/ant/.npm/react-native-marquee-label/1.0.0/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/ant/.npm correctMkdir not in flight; initializing
+10 info lifecycle react-native-marquee-label@1.0.0~prepublish: react-native-marquee-label@1.0.0
+11 silly lifecycle react-native-marquee-label@1.0.0~prepublish: no script for prepublish, continuing
+12 info lifecycle react-native-marquee-label@1.0.0~prepare: react-native-marquee-label@1.0.0
+13 silly lifecycle react-native-marquee-label@1.0.0~prepare: no script for prepare, continuing
+14 verbose tar pack [ '/Users/ant/.npm/react-native-marquee-label/1.0.0/package.tgz',
+14 verbose tar pack   '/Users/ant/github/react-native-marquee-label' ]
+15 verbose tarball /Users/ant/.npm/react-native-marquee-label/1.0.0/package.tgz
+16 verbose folder /Users/ant/github/react-native-marquee-label
+17 verbose addLocalTarball adding from inside cache /Users/ant/.npm/react-native-marquee-label/1.0.0/package.tgz
+18 verbose correctMkdir /Users/ant/.npm correctMkdir not in flight; initializing
+19 silly cache afterAdd react-native-marquee-label@1.0.0
+20 verbose afterAdd /Users/ant/.npm/react-native-marquee-label/1.0.0/package/package.json not in flight; writing
+21 verbose correctMkdir /Users/ant/.npm correctMkdir not in flight; initializing
+22 verbose afterAdd /Users/ant/.npm/react-native-marquee-label/1.0.0/package/package.json written
+23 silly publish { name: 'react-native-marquee-label',
+23 silly publish   version: '1.0.0',
+23 silly publish   description: 'A react-native marquee label component.',
+23 silly publish   main: 'index.js',
+23 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+23 silly publish   repository:
+23 silly publish    { type: 'git',
+23 silly publish      url: 'git+https://github.com/cheng-kang/react-native-marquee-label.git' },
+23 silly publish   keywords: [ 'react-native', 'marquee', 'marquee label' ],
+23 silly publish   author: { name: 'CHENGKANG' },
+23 silly publish   license: 'ISC',
+23 silly publish   bugs: { url: 'https://github.com/cheng-kang/react-native-marquee-label/issues' },
+23 silly publish   homepage: 'https://github.com/cheng-kang/react-native-marquee-label#readme',
+23 silly publish   readme: '# react-native-marquee-label\n> A react-native marquee label component.\n\n## Desc\n\n[Skip this part, go to **#Install**](#install)\n\nI needed a marquee label in one of my recent project and I didn\'t find a good one online, so I decided to create my own marquee label component.\n\nI intended to make it work well on both iOS and Android, still there remains one thing in iOS which I cannot fix. I found that in **iOS**, when you use `View` component to wrap child components and don\'t explicitly set the parent `View` component width (e.g. use `flex`), the parent `View` component will have the same width as it\'s child. \n\nIt becomes a problem in this custom component because I use a child `View` component to wrap `Text` component in order to make the text expand and show in one line. I **set the text containner `View` component size to be bigger than the `Text` so that it will not have multiple lines nor have the overflow text replaced by ellipsis.** The default value of text container width is 1000, which is usually larger than the actual label width. This results in the problem mentioned above, the wrapper `View` width becomes 1000 also.\n\n```js\n<View class="marquee-label">\n  <View class="marquee-label-text-container">\n    <Text class="marquee-label-text">{text}</Text>\n  </View>\n</View>\n```\n\n**Note:**\n\n- In Andorid, you can use both `style.width` or `flex` to layout the view.\n- In iOS, use `style.width` to layout the view. `flex` layout is not supported.\n\n\n## Install\n\n## Usage\n```js\n<MarqueeLabel\n  duration={8000}\n  text={\'This is a Marquee Label.\'}\n  textStyle={{ fontSize: 13, color: \'white\' }}\n/>\n```\n\nor\n\n```js\n<MarqueeLabel\n  speed={250}\n  textStyle={{ fontSize: 13, color: \'white\' }}\n>\n  This is a Marquee Label.\n</MarqueeLabel>\n```\n\n## Props\n\n- `children`: string, the text to show in the marquee. Alternative to `text`.\n- `text`: string, the text to show in the marquee. Alternative to `children`.\n- `duration`: number(unit: millisecond), the duration for the marquee to run one round. e.g. 6000 (for 6 seconds a round). Alternative to `speed`.\n- `speed`: number(unit: px/s, px per second), the speed of the marquee. Alternative to `duration`.\n- `bgViewStyle`: stylesheet object, background view component custom styles.\n- `textStyle`: stylesheet object, text component custom styles.\n- `textContainerWidth`: number, text container component width. If the text is not shown in one line, increase this value.\n- `textContainerHeight`: number, text container component height. If the text is not shown in one line, increase this value.\n- `textContainerStyle`: stylesheet object, not recommended to use, text containner component custom style.\n',
+23 silly publish   readmeFilename: 'README.md',
+23 silly publish   gitHead: 'bb6cd3e6f9e43fe458ad1a2612cb9db24cdc8e5c',
+23 silly publish   _id: 'react-native-marquee-label@1.0.0',
+23 silly publish   _shasum: 'ce3447fc7dd2bd52913446caf0731544324c2f25',
+23 silly publish   _from: '.' }
+24 info lifecycle react-native-marquee-label@1.0.0~prepublishOnly: react-native-marquee-label@1.0.0
+25 silly lifecycle react-native-marquee-label@1.0.0~prepublishOnly: no script for prepublishOnly, continuing
+26 verbose getPublishConfig undefined
+27 silly mapToRegistry name react-native-marquee-label
+28 silly mapToRegistry using default registry
+29 silly mapToRegistry registry https://registry.npmjs.org/
+30 silly mapToRegistry data Result {
+30 silly mapToRegistry   raw: 'react-native-marquee-label',
+30 silly mapToRegistry   scope: null,
+30 silly mapToRegistry   escapedName: 'react-native-marquee-label',
+30 silly mapToRegistry   name: 'react-native-marquee-label',
+30 silly mapToRegistry   rawSpec: '',
+30 silly mapToRegistry   spec: 'latest',
+30 silly mapToRegistry   type: 'tag' }
+31 silly mapToRegistry uri https://registry.npmjs.org/react-native-marquee-label
+32 verbose publish registryBase https://registry.npmjs.org/
+33 silly publish uploading /Users/ant/.npm/react-native-marquee-label/1.0.0/package.tgz
+34 verbose request uri https://registry.npmjs.org/react-native-marquee-label
+35 verbose request sending authorization for write operation
+36 info attempt registry request try #1 at 1:34:40 PM
+37 verbose request using bearer token for auth
+38 verbose request id 2c6bced6ea1cb1f2
+39 http request PUT https://registry.npmjs.org/react-native-marquee-label
+40 http 403 https://registry.npmjs.org/react-native-marquee-label
+41 verbose headers { 'content-type': 'application/json',
+41 verbose headers   'cache-control': 'max-age=300',
+41 verbose headers   'content-length': '120',
+41 verbose headers   'accept-ranges': 'bytes',
+41 verbose headers   date: 'Tue, 11 Apr 2017 20:34:40 GMT',
+41 verbose headers   via: '1.1 varnish',
+41 verbose headers   connection: 'keep-alive',
+41 verbose headers   'x-served-by': 'cache-lax8646-LAX',
+41 verbose headers   'x-cache': 'MISS',
+41 verbose headers   'x-cache-hits': '0',
+41 verbose headers   'x-timer': 'S1491942880.554509,VS0,VE168',
+41 verbose headers   vary: 'Accept-Encoding' }
+42 verbose request invalidating /Users/ant/.npm/registry.npmjs.org/react-native-marquee-label on PUT
+43 error publish Failed PUT 403
+44 verbose stack Error: you do not have permission to publish "react-native-marquee-label". Are you logged in as the correct user? : react-native-marquee-label
+44 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:304:12)
+44 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:292:14)
+44 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:212:14)
+44 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:186:22)
+44 verbose stack     at emitTwo (events.js:87:13)
+44 verbose stack     at Request.emit (events.js:172:7)
+44 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1081:10)
+44 verbose stack     at emitOne (events.js:77:13)
+44 verbose stack     at Request.emit (events.js:169:7)
+44 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1001:12)
+45 verbose statusCode 403
+46 verbose pkgid react-native-marquee-label
+47 verbose cwd /Users/ant/github/react-native-marquee-label
+48 error Darwin 16.4.0
+49 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+50 error node v4.0.0
+51 error npm  v4.1.2
+52 error code E403
+53 error you do not have permission to publish "react-native-marquee-label". Are you logged in as the correct user? : react-native-marquee-label
+54 error If you need help, you may report this error at:
+54 error     <https://github.com/npm/npm/issues>
+55 verbose exit [ 1, true ]

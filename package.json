@@ -1,0 +1,24 @@
+{
+  "name": "react-native-marquee-label",
+  "version": "1.0.0",
+  "description": "A react-native marquee label component.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheng-kang/react-native-marquee-label.git"
+  },
+  "keywords": [
+    "react-native",
+    "marquee",
+    "marquee label"
+  ],
+  "author": "CHENGKANG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cheng-kang/react-native-marquee-label/issues"
+  },
+  "homepage": "https://github.com/cheng-kang/react-native-marquee-label#readme"
+}
