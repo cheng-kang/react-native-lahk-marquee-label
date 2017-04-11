@@ -11,13 +11,13 @@ I intended to make it work well on both iOS and Android, still there remains one
 
 It becomes a problem in this custom component because I use a child `View` component to wrap `Text` component in order to make the text expand and show in one line. I **set the text containner `View` component size to be bigger than the `Text` so that it will not have multiple lines nor have the overflow text replaced by ellipsis.** The default value of text container width is 1000, which is usually larger than the actual label width. This results in the problem mentioned above, the wrapper `View` width becomes 1000 also.
 
-``js
+```js
 <View class="marquee-label">
   <View class="marquee-label-text-container">
     <Text class="marquee-label-text">{text}</Text>
   </View>
 </View>
-``
+```
 
 **Note:**
 
