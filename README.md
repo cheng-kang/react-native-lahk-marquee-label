@@ -1,6 +1,10 @@
 # react-native-lahk-marquee-label
 > A react-native marquee label component.
 
+[![npm version](https://badge.fury.io/js/react-native-lahk-marquee-label.svg)](https://badge.fury.io/js/react-native-lahk-marquee-label)
+
+## Anchors
+
 1. [Desc](#desc)
 2. [Install](#install)
 3. [Usage](#usage)
