@@ -1,6 +1,11 @@
 # react-native-lahk-marquee-label
 > A react-native marquee label component.
 
+1. [Desc](#desc)
+2. [Install](#install)
+3. [Usage](#usage)
+4. [Props](#props)
+
 ## Desc
 
 [Skip this part, go to **#Install**](#install)
