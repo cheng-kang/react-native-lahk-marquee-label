@@ -1,4 +1,4 @@
-# react-native-marquee-label
+# react-native-lahk-marquee-label
 > A react-native marquee label component.
 
 ## Desc
