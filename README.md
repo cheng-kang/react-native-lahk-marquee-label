@@ -27,7 +27,20 @@ It becomes a problem in this custom component because I use a child `View` compo
 
 ## Install
 
+```sh
+npm install --save react-native-lahk-marquee-label
+```
+
 ## Usage
+
+1. Import
+
+```js
+import MarqueeLabel from 'react-native-lahk-marquee-label';
+```
+
+2. Use
+
 ```js
 <MarqueeLabel
   duration={8000}
