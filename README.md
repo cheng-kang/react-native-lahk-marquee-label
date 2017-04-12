@@ -9,6 +9,7 @@
 2. [Install](#install)
 3. [Usage](#usage)
 4. [Props](#props)
+5. [中文介绍](#中文介绍)
 
 ## Desc
 
@@ -30,8 +31,8 @@ It becomes a problem in this custom component because I use a child `View` compo
 
 **Note:**
 
-- In Andorid, you can use both `style.width` or `flex` to layout the view.
-- In iOS, use `style.width` to layout the view. `flex` layout is not supported.
+- In Andorid, you can use both `width` or `flex` to layout the view.
+- In iOS, use `width` to layout the view. `flex` layout is not supported.
 
 
 ## Install
@@ -80,3 +81,28 @@ or
 - `textContainerWidth`: number, text container component width. If the text is not shown in one line, increase this value.
 - `textContainerHeight`: number, text container component height. If the text is not shown in one line, increase this value.
 - `textContainerStyle`: stylesheet object, not recommended to use, text containner component custom style.
+
+## 中文介绍
+
+[跳转到 **#install**](#install)
+
+我在一个项目中需要用到跑马灯，但是在网上没找到好用的。所以我就自己写了一个跑马灯的组件。
+
+本来打算让它可以在 iOS 和 Android 平台上都好用的，不过还是在 iOS 平台上存在一个问题没法解决。
+
+我发现在 iOS 平台上，当使用 `View` 组件来包裹子组件的时候，如果没有显示设置父级 `View` 组件的宽度（width 样式）（比如用 `flex` 布局），那么父级 `View` 组件的宽度会被自动设置成子组件的宽度。（至少当子组件比父组件宽度大时是这样的，另外一种情况我没有做试验。）
+
+我的跑马灯组件中的问题在于，我用了一个子级 `View` 组件来包裹 `Text` 组件以保证文字是在一行全部显示。**通过将 text container 的宽度设置得比 `Text` 组件宽度大，保证了文字不会换行，也不会用省略号替换溢出文字。** text container 默认宽度为 1000，这比一般的跑马灯标签实际宽度要大。而这也就导致了上述的问题，最外层的 `View` 的宽度也变成了 1000。
+
+```js
+<View class="marquee-label">
+  <View class="marquee-label-text-container">
+    <Text class="marquee-label-text">{text}</Text>
+  </View>
+</View>
+```
+
+**因此要注意：**
+
+- 在 Android 平台上，通过 `width` 或者 `flex` 布局来设置最外层 `View` 的样式都没问题。
+- 在 iOS 平台上，请使用并且只能使用 `width` 来设置样式。
