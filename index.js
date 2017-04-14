@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Animated, Easing } from 'react-native';
 
-class MarqueeLabel extends Component {
+export default class MarqueeLabel extends Component {
   state = {
-    started: false
+    started: false // use state for this variable to make sure that any change would affect UI
   };
 
   componentWillMount() {
@@ -11,19 +11,30 @@ class MarqueeLabel extends Component {
     this.bgViewWidth = 0;
     this.textWidth = 0;
     this.duration = 0;
+    this.shouldFinish = false;
+  }
+
+  componentWillUnmount() {
+    this.shouldFinish = true;
   }
 
   textOnLayout(e) {
     this.textWidth = e.nativeEvent.layout.width;
 
     if (this.bgViewWidth !== 0) {
-      this.animate();
+      this.prepareToAnimate();
     }
   }
 
   bgViewOnLayout(e) {
     this.bgViewWidth = e.nativeEvent.layout.width;
 
+    if (this.textWidth !== 0) {
+      this.prepareToAnimate();
+    }
+  }
+
+  prepareToAnimate() {
     // Calculate this.duration by this.props.duration / this.props.speed
     // If this.props.duration is set, discard this.props.speed
     const { duration, speed } = this.props;
@@ -33,14 +44,12 @@ class MarqueeLabel extends Component {
       this.duration = ((this.bgViewWidth + this.textWidth) / speed) * 1000;
     }
 
-    if (this.textWidth !== 0) {
-      this.animate();
-    }
+    this.animate();
   }
 
   animate() {
     this.animatedTransformX.setValue(this.bgViewWidth);
-    if (!this.started) {
+    if (!this.state.started) {
       this.setState({
         started: true
       });
@@ -50,7 +59,11 @@ class MarqueeLabel extends Component {
         duration: this.duration,
         useNativeDriver: true,
         easing: Easing.linear
-    }).start(() => this.animate());
+    }).start(() => {
+      if (!this.shouldFinish) {
+        this.animate()
+      }
+    });
   }
 
   render() {
@@ -118,5 +131,3 @@ const styles = {
     justifyContent: 'flex-start'
   }
 };
-
-export default MarqueeLabel;

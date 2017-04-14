@@ -1,6 +1,6 @@
 {
-  "name": "react-native-marquee-label",
-  "version": "1.0.0",
+  "name": "react-native-lahk-marquee-label",
+  "version": "1.0.2",
   "description": "A react-native marquee label component.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cheng-kang/react-native-marquee-label.git"
+    "url": "git+https://github.com/cheng-kang/react-native-lahk-marquee-label.git"
   },
   "keywords": [
     "react-native",
@@ -18,7 +18,7 @@
   "author": "CHENGKANG",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cheng-kang/react-native-marquee-label/issues"
+    "url": "https://github.com/cheng-kang/react-native-lahk-marquee-label/issues"
   },
-  "homepage": "https://github.com/cheng-kang/react-native-marquee-label#readme"
+  "homepage": "https://github.com/cheng-kang/react-native-lahk-marquee-label#readme"
 }
