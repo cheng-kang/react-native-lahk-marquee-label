@@ -1,6 +1,8 @@
 # react-native-lahk-marquee-label
 > A react-native marquee label component.
 
+If you need a vertical marquee label, please use [react-native-lahk-marquee-label-vertical](https://github.com/cheng-kang/react-native-lahk-marquee-label-vertical).
+
 [![npm version](https://badge.fury.io/js/react-native-lahk-marquee-label.svg)](https://badge.fury.io/js/react-native-lahk-marquee-label)
 
 ## Anchors
