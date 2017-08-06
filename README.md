@@ -4,7 +4,7 @@
 If you need a vertical marquee label, please use [react-native-lahk-marquee-label-vertical](https://github.com/cheng-kang/react-native-lahk-marquee-label-vertical).
 
 [![npm version](https://badge.fury.io/js/react-native-lahk-marquee-label.svg)](https://badge.fury.io/js/react-native-lahk-marquee-label)
-[![npm](https://img.shields.io/npm/dt/express.svg)](https://www.npmjs.com/package/react-native-lahk-marquee-label)
+[![NPM](https://nodei.co/npm-dl/react-native-lahk-marquee-label.png)](https://nodei.co/npm/react-native-lahk-marquee-label/)
 
 ## Anchors
 
