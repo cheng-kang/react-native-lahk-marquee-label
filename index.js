@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Animated, Easing } from 'react-native';
+import { View, Animated, Easing, Text } from 'react-native';
 
 export default class MarqueeLabel extends Component {
   state = {
@@ -10,6 +10,7 @@ export default class MarqueeLabel extends Component {
     this.animatedTransformX = new Animated.Value(0);
     this.bgViewWidth = 0;
     this.textWidth = 0;
+    this.textHeight = 0;
     this.duration = 0;
     this.shouldFinish = false;
   }
@@ -20,6 +21,7 @@ export default class MarqueeLabel extends Component {
 
   textOnLayout(e) {
     this.textWidth = e.nativeEvent.layout.width;
+    this.textHeight = e.nativeEvent.layout.height;
 
     if (this.bgViewWidth !== 0) {
       this.prepareToAnimate();
@@ -101,18 +103,29 @@ export default class MarqueeLabel extends Component {
             ...textContainerStyle
           }}
         >
-        <Animated.Text 
+          <Animated.Text 
+            style={{
+              fontSize: 20,
+              transform: [{ translateX: this.animatedTransformX }],
+              width: this.textWidth,
+              height: this.textHeight,
+              ...textStyle
+            }}
+            adjustsFontSizeToFit
+            // onLayout={(event) => this.textOnLayout(event)}
+          >
+            {children || text || ' '}
+          </Animated.Text>
+        </View>
+        <Text
           style={{
-            fontSize: 20,
-            transform: [{ translateX: this.animatedTransformX }],
+            ...styles.textSizeMeasuringViewStyle,
             ...textStyle
           }}
-          adjustsFontSizeToFit
           onLayout={(event) => this.textOnLayout(event)}
         >
           {children || text || ' '}
-        </Animated.Text>
-        </View>
+        </Text>
       </View>
     );
   }
@@ -129,5 +142,9 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start'
+  },
+  textSizeMeasuringViewStyle: {
+    opacity: 0,
+    fontSize: 20
   }
 };
