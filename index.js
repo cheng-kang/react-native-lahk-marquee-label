@@ -26,10 +26,10 @@ export default class MarqueeLabel extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let newText = nextProps.text || nextProps.children || ''
-    let oldText = this.props.text || this.props.children || ''
+    let newText = nextProps.text || nextProps.children || '';
+    let oldText = this.props.text || this.props.children || '';
     if (newText !== oldText) {
-      this.state.animation.stop()
+      this.state.animation.stop();
       this.setState({
         text: newText,
         textWidth: 0,
@@ -56,9 +56,7 @@ export default class MarqueeLabel extends Component {
           duration: ((bgViewWidth + textWidth) / speed) * 1000
         });
       }
-    }
-
-    if (duration !== 0) {
+    } else {
       if (animation === null) {
         this.animatedTransformX.setValue(bgViewWidth);
         this.setState({
@@ -141,7 +139,7 @@ export default class MarqueeLabel extends Component {
         </View>
         <Text
           style={{
-            ...styles.textMeasuringViewStyle,
+            ...styles.textSizeMeasuringViewStyle,
             ...textStyle
           }}
           onLayout={(event) => this.textOnLayout(event)}
@@ -165,7 +163,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
-  textMeasuringViewStyle: {
+  textSizeMeasuringViewStyle: {
     opacity: 0,
     fontSize: 20
   }
