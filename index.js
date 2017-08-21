@@ -3,75 +3,98 @@ import { View, Animated, Easing, Text } from 'react-native';
 
 export default class MarqueeLabel extends Component {
   state = {
-    started: false // use state for this variable to make sure that any change would affect UI
+    textWidth: 0,
+    textHeight: 0,
+    bgViewWidth: 0,
+    duration: 0,
+    text: '',
+    animation: null
   };
 
   componentWillMount() {
+    this.setState({
+      text: this.props.text || this.props.children || ''
+    })
+    this.animation = null
     this.animatedTransformX = new Animated.Value(0);
-    this.bgViewWidth = 0;
-    this.textWidth = 0;
-    this.textHeight = 0;
-    this.duration = 0;
-    this.shouldFinish = false;
   }
 
   componentWillUnmount() {
-    this.shouldFinish = true;
+    if (this.state.animation !== null) {
+      this.state.animation.stop()
+    }
   }
 
-  textOnLayout(e) {
-    this.textWidth = e.nativeEvent.layout.width;
-    this.textHeight = e.nativeEvent.layout.height;
-
-    if (this.bgViewWidth !== 0) {
-      this.prepareToAnimate();
+  componentWillReceiveProps(nextProps) {
+    let newText = nextProps.text || nextProps.children || ''
+    let oldText = this.props.text || this.props.children || ''
+    if (newText !== oldText) {
+      this.state.animation.stop()
+      this.setState({
+        text: newText,
+        textWidth: 0,
+        textHeight: 0,
+        duration: 0,
+        animation: null
+      });
     }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    let { textWidth, bgViewWidth, duration, animation } = this.state;
+
+    if (duration === 0) {
+      if (textWidth === 0 || bgViewWidth === 0) { return }
+
+      const { duration, speed } = this.props;
+      if (duration !== undefined) {
+        this.setState({
+          duration: duration
+        });
+      } else if (speed !== undefined) {
+        this.setState({
+          duration: ((bgViewWidth + textWidth) / speed) * 1000
+        });
+      }
+    }
+
+    if (duration !== 0) {
+      if (animation === null) {
+        this.animatedTransformX.setValue(bgViewWidth);
+        this.setState({
+          animation: Animated.timing(this.animatedTransformX, {
+            toValue: -textWidth,
+            duration: duration,
+            useNativeDriver: true,
+            easing: Easing.linear
+          })
+        })
+      } else {
+        animation.start(() => {
+          this.setState({
+            animation: null
+          })
+        });
+      }
+    }
+  }
+
+
+  textOnLayout(e) {
+    this.setState({
+      textWidth: e.nativeEvent.layout.width,
+      textHeight: e.nativeEvent.layout.height
+    });
   }
 
   bgViewOnLayout(e) {
-    this.bgViewWidth = e.nativeEvent.layout.width;
-
-    if (this.textWidth !== 0) {
-      this.prepareToAnimate();
-    }
-  }
-
-  prepareToAnimate() {
-    // Calculate this.duration by this.props.duration / this.props.speed
-    // If this.props.duration is set, discard this.props.speed
-    const { duration, speed } = this.props;
-    if (duration !== undefined) {
-      this.duration = duration;
-    } else if (speed !== undefined) {
-      this.duration = ((this.bgViewWidth + this.textWidth) / speed) * 1000;
-    }
-
-    this.animate();
-  }
-
-  animate() {
-    this.animatedTransformX.setValue(this.bgViewWidth);
-    if (!this.state.started) {
-      this.setState({
-        started: true
-      });
-    }
-    Animated.timing(this.animatedTransformX, {
-        toValue: -this.textWidth,
-        duration: this.duration,
-        useNativeDriver: true,
-        easing: Easing.linear
-    }).start(() => {
-      if (!this.shouldFinish) {
-        this.animate()
-      }
+    this.setState({
+      bgViewWidth: e.nativeEvent.layout.width
     });
   }
 
   render() {
     const { 
-      children, 
-      text,
       bgViewStyle, // Backgound View Custom Styles
       textStyle, // Text Custom Styles
 
@@ -87,7 +110,7 @@ export default class MarqueeLabel extends Component {
       textContainerStyle // Text Container Custom Styles, not recommended to use
     } = this.props;
 
-    const { started } = this.state;
+    const { textWidth, textHeight, text, animation } = this.state;
 
     return (
       <View 
@@ -99,7 +122,7 @@ export default class MarqueeLabel extends Component {
             ...styles.textContainerStyle,
             width: textContainerWidth,
             height: textContainerHeight,
-            opacity: started ? 1 : 0,
+            opacity: animation === null ? 0 : 1, // Make sure the view only shows when it's animating
             ...textContainerStyle
           }}
         >
@@ -107,24 +130,23 @@ export default class MarqueeLabel extends Component {
             style={{
               fontSize: 20,
               transform: [{ translateX: this.animatedTransformX }],
-              width: this.textWidth,
-              height: this.textHeight,
+              width: textWidth,
+              height: textHeight,
               ...textStyle
             }}
             adjustsFontSizeToFit
-            // onLayout={(event) => this.textOnLayout(event)}
           >
-            {children || text || ' '}
+            {text}
           </Animated.Text>
         </View>
         <Text
           style={{
-            ...styles.textSizeMeasuringViewStyle,
+            ...styles.textMeasuringViewStyle,
             ...textStyle
           }}
           onLayout={(event) => this.textOnLayout(event)}
         >
-          {children || text || ' '}
+          {text}
         </Text>
       </View>
     );
@@ -143,7 +165,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
-  textSizeMeasuringViewStyle: {
+  textMeasuringViewStyle: {
     opacity: 0,
     fontSize: 20
   }
