@@ -11,7 +11,8 @@ If you need a vertical marquee label, please use [react-native-lahk-marquee-labe
 2. [Install](#install)
 3. [Usage](#usage)
 4. [Props](#props)
-5. [中文介绍](#中文介绍)
+5. [Update Log](#update-log)
+6. [中文介绍](#中文介绍)
 
 ## Desc
 
@@ -83,6 +84,12 @@ or
 - `textContainerWidth`: number, text container component width. If the text is not shown in one line, increase this value.
 - `textContainerHeight`: number, text container component height. If the text is not shown in one line, increase this value.
 - `textContainerStyle`: stylesheet object, not recommended to use, text containner component custom style.
+
+## Update Log
+
+### 2017.08.21 `Version 1.1.0`
+
+- Dynamic Text Support: now you can use dynamic text with this component :D
 
 ## 中文介绍
 
