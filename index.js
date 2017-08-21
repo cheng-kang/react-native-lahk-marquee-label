@@ -132,7 +132,6 @@ export default class MarqueeLabel extends Component {
               height: textHeight,
               ...textStyle
             }}
-            adjustsFontSizeToFit
           >
             {text}
           </Animated.Text>
