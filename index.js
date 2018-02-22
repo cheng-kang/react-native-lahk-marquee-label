@@ -62,21 +62,20 @@ export default class MarqueeLabel extends Component {
         this.setState({
           animation: Animated.timing(this.animatedTransformX, {
             toValue: -textWidth,
-            duration: duration,
-            useNativeDriver: true,
-            easing: Easing.linear
+              duration: duration,
+              useNativeDriver: true,
+              easing: Easing.linear
+          })
+        }, () => {
+          this.state.animation.start(() => {
+            this.setState({
+              animation: null
+            })
           })
         })
-      } else {
-        animation.start(() => {
-          this.setState({
-            animation: null
-          })
-        });
       }
     }
   }
-
 
   textOnLayout(e) {
     this.setState({
