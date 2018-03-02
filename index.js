@@ -92,7 +92,7 @@ export default class MarqueeLabel extends Component {
 
   render() {
     const { 
-      bgViewStyle, // Backgound View Custom Styles
+      bgViewStyle, // Background View Custom Styles
       textStyle, // Text Custom Styles
 
       // Text Container Width: 
