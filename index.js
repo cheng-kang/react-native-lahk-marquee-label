@@ -8,20 +8,21 @@ export default class MarqueeLabel extends Component {
     bgViewWidth: 0,
     duration: 0,
     text: '',
-    animation: null,
+
+    animation: null
   };
 
   componentWillMount() {
     this.setState({
-      text: this.props.text || this.props.children || '',
-    });
-    this.animation = null;
+      text: this.props.text || this.props.children || ''
+    })
+    this.animation = null
     this.animatedTransformX = new Animated.Value(0);
   }
 
   componentWillUnmount() {
     if (this.state.animation !== null) {
-      this.state.animation.stop();
+      this.state.animation.stop()
     }
   }
 
@@ -35,13 +36,14 @@ export default class MarqueeLabel extends Component {
         textWidth: 0,
         textHeight: 0,
         duration: 0,
-        animation: null,
+  
+        animation: null
       });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    let { textWidth, bgViewWidth, duration, animation } = this.state;
+    let {textWidth, bgViewWidth, duration, animation } = this.state;
 
     if (duration === 0) {
       if (textWidth === 0 || bgViewWidth === 0) { return }
@@ -49,30 +51,35 @@ export default class MarqueeLabel extends Component {
       const { duration, speed } = this.props;
       if (duration !== undefined) {
         this.setState({
-          duration: duration,
+          duration: duration
         });
       } else if (speed !== undefined) {
         this.setState({
-          duration: ((bgViewWidth + textWidth) / speed) * 1000,
+          duration: ((bgViewWidth + textWidth) / speed) * 1000
         });
       }
     } else {
+      let { rtl } = this.props;
+      if( !rtl )
+        rtl = false;
+      
       if (animation === null) {
-        this.animatedTransformX.setValue(bgViewWidth);
+       
+        this.animatedTransformX.setValue(rtl ?  textWidth*-1:bgViewWidth);
         this.setState({
           animation: Animated.timing(this.animatedTransformX, {
-            toValue: -textWidth,
+            toValue: rtl? textWidth:-textWidth,
               duration: duration,
               useNativeDriver: true,
-              easing: Easing.linear,
-          }),
+              easing: Easing.linear
+          })
         }, () => {
           this.state.animation.start(() => {
             this.setState({
-              animation: null,
-            });
-          });
-        });
+              animation: null
+            })
+          })
+        })
       }
     }
   }
@@ -80,13 +87,13 @@ export default class MarqueeLabel extends Component {
   textOnLayout(e) {
     this.setState({
       textWidth: e.nativeEvent.layout.width,
-      textHeight: e.nativeEvent.layout.height,
+      textHeight: e.nativeEvent.layout.height
     });
   }
 
   bgViewOnLayout(e) {
     this.setState({
-      bgViewWidth: e.nativeEvent.layout.width,
+      bgViewWidth: e.nativeEvent.layout.width
     });
   }
 
@@ -104,7 +111,7 @@ export default class MarqueeLabel extends Component {
       // usually increase this value when text has a large font size.
       textContainerHeight = 100,
 
-      textContainerStyle, // Text Container Custom Styles, not recommended to use
+      textContainerStyle // Text Container Custom Styles, not recommended to use
     } = this.props;
 
     const { textWidth, textHeight, text, animation } = this.state;
@@ -120,7 +127,7 @@ export default class MarqueeLabel extends Component {
             width: textContainerWidth,
             height: textContainerHeight,
             opacity: animation === null ? 0 : 1, // Make sure the view only shows when it's animating
-            ...textContainerStyle,
+            ...textContainerStyle
           }}
         >
           <Animated.Text 
@@ -129,7 +136,7 @@ export default class MarqueeLabel extends Component {
               transform: [{ translateX: this.animatedTransformX }],
               width: textWidth,
               height: textHeight,
-              ...textStyle,
+              ...textStyle
             }}
           >
             {text}
@@ -138,7 +145,7 @@ export default class MarqueeLabel extends Component {
         <Text
           style={{
             ...styles.textSizeMeasuringViewStyle,
-            ...textStyle,
+            ...textStyle
           }}
           onLayout={(event) => this.textOnLayout(event)}
         >
@@ -159,10 +166,10 @@ const styles = {
   textContainerStyle: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'
   },
   textSizeMeasuringViewStyle: {
     opacity: 0,
-    fontSize: 20,
-  },
+    fontSize: 20
+  }
 };
