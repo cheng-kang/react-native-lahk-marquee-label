@@ -68,7 +68,7 @@ export default class MarqueeLabel extends Component {
         this.animatedTransformX.setValue(rtl ?  textWidth*-1:bgViewWidth);
         this.setState({
           animation: Animated.timing(this.animatedTransformX, {
-            toValue: rtl? textWidth:-textWidth,
+            toValue: bgViewWidth,
               duration: duration,
               useNativeDriver: true,
               easing: Easing.linear
